@@ -10,7 +10,8 @@ import { Project } from "@/schemas/project";
 import Link from "next/link";
 import { projectsMock } from "@/__mock__/projects.Mock";
 
-export function HomePage() {
+
+export default function HomePage() {
   const [time, setTime] = useState<Date | null>(null);
 
   useEffect(() => {

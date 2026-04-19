@@ -12,7 +12,7 @@ export function AppButton({
   className,
   ...rest
 }: Props): React.ReactElement {
-  const baseStyle = "w-20 h-10 inline-flex items-center justify-center hover:opacity-50 px-4 rounded-[15px]"
+  const baseStyle = "min-w-20 h-10 inline-flex items-center justify-center hover:opacity-50 px-4 rounded-[15px]"
 
   const styleMap = {
     primary: "bg-blue-500 text-white",
