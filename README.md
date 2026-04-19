@@ -21,6 +21,7 @@ First time with NextJS
 ## 参考動画
 shincodeさんの解説は、初めてライブラリを触る人からある程度使える人まで、幅広く参考になります。
 
+※ 2022年時点の動画ですが、ほとんどの部分が今のnext.jsでも通用します。（2026/04時点）
 
 <a href="https://youtu.be/eEP7CLqnRr0?si=m-BKihckmQUYj8rT&t=90" align="center">
   <img
