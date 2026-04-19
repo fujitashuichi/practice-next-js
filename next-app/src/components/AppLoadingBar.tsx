@@ -8,7 +8,7 @@ type Props = {
 
 export function AppLoadingBar({ className, innerColorHex, outerColorHex }: Props) {
   const baseStyle = "fixed top-0 left-1/2 -translate-x-1/2 z-10 w-full h-1.5";
-  const mergedStyle = `${baseStyle} ${className}`;
+  const mergedStyle = `${baseStyle} ${className ?? ""}`;
 
 
   const loadingBarStyles = {
