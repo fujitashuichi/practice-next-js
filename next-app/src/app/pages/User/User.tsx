@@ -13,7 +13,7 @@ export function User() {
 
 
   /* mock → */
-  const [status,] = "idle";
+  const [status,] = useState("idle");
   /* ← mock */
 
 
