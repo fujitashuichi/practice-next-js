@@ -17,3 +17,19 @@ First time with NextJS
 √ Would you like to customize the import alias (`@/*` by default)? ... No
 √ Would you like to include AGENTS.md to guide coding agents to write up-to-date Next.js code? ... Yes
 ```
+
+## 参考動画
+shincodeさんの解説は、初めてライブラリを触る人からある程度使える人まで、幅広く参考になります。
+
+
+<a href="https://youtu.be/eEP7CLqnRr0?si=m-BKihckmQUYj8rT&t=90" align="center">
+  <img
+    src="https://img.youtube.com/vi/eEP7CLqnRr0/maxresdefault.jpg"
+    alt="YouTube movie"
+    height="120"
+  />
+</a>
+
+## 学習履歴
+**2026/04/19**
+* next-jsのインストール
