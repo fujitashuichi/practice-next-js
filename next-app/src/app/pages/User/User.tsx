@@ -4,6 +4,7 @@ import { AppButton } from "@/components";
 import { AppLoadingBar } from "@/components/AppLoadingBar";
 import { UserCard } from "@/features";
 import Link from "next/link";
+import { useState } from "react";
 
 export function User() {
   /* original → /
