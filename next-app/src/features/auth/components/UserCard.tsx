@@ -1,0 +1,106 @@
+"use client"
+
+import { userMock } from "@/__mock__/userMock";
+import { AppButton, AppLoadingBar } from "@/components";
+import Link from "next/link";
+import { useState } from "react"
+
+export function UserCard() {
+  /* original → /
+  const { session, useUser, getUser } = useAuth();
+
+  const { status: sessionStatus } = session;
+  const { user } = useUser;
+  const { status: gettingStatus, errorMessage } = getUser;
+  /* ← original */
+
+  /* mock →  */
+  const [gettingStatus, ] = useState("success");
+  const [sessionStatus, ] = useState("active");
+  const errorMessage = "errorMessage";
+  const user = userMock;
+  /* ← mock */
+
+
+
+  if (gettingStatus === "idle" || gettingStatus === "pending" || sessionStatus === "idle") {
+    return <AppLoadingBar />;
+  }
+
+  if (sessionStatus === "inactive") return <LoginPrompt />
+
+  if (gettingStatus === "error") return <ErrorDisplay message={errorMessage ?? "エラーが発生しました"} />
+
+  if (user === null) return <NoUserDataView />
+
+  return (<>
+    <div className="max-w-2xl mx-auto space-y-8">
+      {gettingStatus === "success" && (
+        <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-8 space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              <div className="space-y-1">
+                <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Email address</h2>
+                <p className="text-lg font-medium text-slate-900 break-all">{user.email}</p>
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Created at</h2>
+                <p className="text-lg font-medium text-slate-900">
+                  {new Date(user.createdAt).toLocaleString()}
+                </p>
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-slate-100 flex justify-end">
+              <Link href="/">
+                <AppButton variant="primary" className="w-auto">
+                  ダッシュボードへ戻る
+                </AppButton>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  </>)
+}
+
+function LoginPrompt() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4">
+      <h1 className="text-xl font-bold text-slate-800">ログインしてください</h1>
+      <p className="text-sm text-slate-500">この操作には認証が必要です。</p>
+    </div>
+  )
+}
+
+function ErrorDisplay({ message }: { message: string }) {
+  return (
+    <div className="p-6 bg-red-50 border border-red-100 rounded-xl flex flex-col items-center gap-4">
+      <h1 className="text-md font-semibold text-red-700">{message}</h1>
+      <AppButton
+        variant="primary"
+        onClick={() => window.location.reload()}
+        className="bg-red-600 hover:bg-red-700"
+      >
+        再試行
+      </AppButton>
+    </div>
+  )
+}
+
+function NoUserDataView() {
+  return (
+    <div className="flex flex-col items-center justify-center p-12 border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/50 gap-6">
+      <div className="text-center space-y-2">
+        <h1 className="text-xl font-bold text-slate-800">データがありません</h1>
+        <p className="text-sm text-slate-500">新しいプロジェクトを開始して、データを追加しましょう。</p>
+      </div>
+      <Link href="/projects">
+        <AppButton variant="primary" className="w-auto">
+          新規作成 ✛
+        </AppButton>
+      </Link>
+    </div>
+  )
+}
