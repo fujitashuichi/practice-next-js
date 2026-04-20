@@ -40,3 +40,4 @@ shincodeさんの解説は、初めてライブラリを触る人からある程
 
 **2026/04/20**
 * projectドメインのUIを移植
+* useRouterの param提供 を学習
