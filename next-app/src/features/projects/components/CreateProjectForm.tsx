@@ -19,9 +19,10 @@ export function CreateProjectForm() {
   /* mock → */
   const [status, setStatus] = useState("idle");
   const errorMessage = "errorMessage";
-  const create = () => {
+  const create = (e: React.FormEvent) => {
+    e.preventDefault();
     const creationTimer = setTimeout(() => setStatus("success"), 2000);
-    const resetTimer = setTimeout(() => setStatus("idle"), 1500);
+    const resetTimer = setTimeout(() => setStatus("idle"), 3500);
 
     return () => {
       clearTimeout(creationTimer);
