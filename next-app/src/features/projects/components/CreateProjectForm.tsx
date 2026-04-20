@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { AppButton } from "../../../components";
 import { AppLoadingBar } from "../../../components/AppLoadingBar";
 
@@ -19,15 +19,11 @@ export function CreateProjectForm() {
   /* mock → */
   const [status, setStatus] = useState("idle");
   const errorMessage = "errorMessage";
-  const create = (e: React.FormEvent) => {
+  const create = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const creationTimer = setTimeout(() => setStatus("success"), 2000);
-    const resetTimer = setTimeout(() => setStatus("idle"), 3500);
 
-    return () => {
-      clearTimeout(creationTimer);
-      clearTimeout(resetTimer);
-    }
+    setTimeout(() => setStatus("success"), 2000);
+    setTimeout(() => setStatus("idle"), 3500);
   }
   /* ← mock */
 
