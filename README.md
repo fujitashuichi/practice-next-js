@@ -22,6 +22,7 @@ First time with NextJS
 shincodeさんの解説は、初めてライブラリを触る人からある程度使える人まで、幅広く参考になります。
 
 ※ 2022年時点の動画ですが、ほとんどの部分が今のnext.jsでも通用します。（2026/04時点）
+※ こちらの動画は PageRouter 方式を採用していますが、このポートフォリオでは AppRouter 方式を採用しています。
 
 <a href="https://youtu.be/eEP7CLqnRr0?si=m-BKihckmQUYj8rT&t=90" align="center">
   <img
