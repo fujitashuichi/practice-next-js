@@ -5,15 +5,13 @@ import { AppButton, AppLoadingBar } from "@/components";
 import { EditProjectModal } from "@/features/projects/components/EditProjectModal";
 import { type Project } from "@/schemas/project";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export function Project() {
   const [editing, setEditing] = useState<boolean>(false);
 
-  const router = useRouter();
-  const { id: idParam } = router.query;
-
+  const idParam = useSearchParams().get("id");
   const id: Project["id"] = Number(idParam);
 
   /* original → /
