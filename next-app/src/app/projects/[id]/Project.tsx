@@ -21,7 +21,9 @@ export function Project() {
 
   /* mock → */
   const projects = projectsMock;
-  const deleteProject = async (_id: Project["id"]) => {};
+  const deleteProject = async (id: Project["id"]) => {
+    console.log("deleted Project:", id);
+  };
   const [deleteStatus, setDeleteStatus] = useState("idle");
   const resetDeleteStatus = () => setDeleteStatus("idle");
   const errorMessage = "errorMessage";

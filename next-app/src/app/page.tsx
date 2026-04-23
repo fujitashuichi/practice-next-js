@@ -1,11 +1,9 @@
 "use client";
 
 import { userMock } from "@/__mock__/userMock";
-import { AppButton, AppLoadingBar } from "@/components";
+import { AppButton, AppHeader, AppLoadingBar, Introduction } from "@/components";
 import { useEffect, useState } from "react";
-import { Introduction } from "./pages-components";
-import { AppHeader } from "@/components/AppHeader";
-import { get7daysProjects } from "./lib/filteredProojects";
+import { get7daysProjects } from "./lib";
 import { Project } from "@/schemas/project";
 import Link from "next/link";
 import { projectsMock } from "@/__mock__/projects.Mock";
