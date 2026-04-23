@@ -5,14 +5,13 @@ import { AppButton, AppLoadingBar } from "@/components";
 import { EditProjectModal } from "@/features/projects/components/EditProjectModal";
 import { type Project } from "@/schemas/project";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export function Project() {
+
+export function Project({ id }: { id: Project["id"] }) {
   const [editing, setEditing] = useState<boolean>(false);
 
-  const idParam = useSearchParams().get("id");
-  const id: Project["id"] = Number(idParam);
+  console.log(id);
 
   /* original → /
   const { projects, delete: deleteProjectHook } = useProject();
