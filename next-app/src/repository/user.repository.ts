@@ -11,7 +11,9 @@ export class UserRepository {
 
       return logger.trace("Prisma connection succeed.");
     } catch (e) {
-      return logger.fatal(`Prisma connection failed.\n ${e}`);
+      logger.fatal(`Prisma connection failed.\n ${e}`);
+      throw e;
+
     }
   }
 }
