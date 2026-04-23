@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { AppButton } from "@/components";
 import { AppLoadingBar } from "@/components/AppLoadingBar";

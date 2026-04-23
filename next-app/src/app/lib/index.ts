@@ -1,0 +1,1 @@
+export { get7daysProjects } from "./filteredProjects"

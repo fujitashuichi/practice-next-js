@@ -5,14 +5,13 @@ import { AppButton, AppLoadingBar } from "@/components";
 import { EditProjectModal } from "@/features/projects/components/EditProjectModal";
 import { type Project } from "@/schemas/project";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export function Project() {
+
+export function Project({ id }: { id: Project["id"] }) {
   const [editing, setEditing] = useState<boolean>(false);
 
-  const idParam = useSearchParams().get("id");
-  const id: Project["id"] = Number(idParam);
+  console.log(id);
 
   /* original → /
   const { projects, delete: deleteProjectHook } = useProject();
@@ -21,7 +20,9 @@ export function Project() {
 
   /* mock → */
   const projects = projectsMock;
-  const deleteProject = async (_id: Project["id"]) => {};
+  const deleteProject = async (id: Project["id"]) => {
+    console.log("deleted Project:", id);
+  };
   const [deleteStatus, setDeleteStatus] = useState("idle");
   const resetDeleteStatus = () => setDeleteStatus("idle");
   const errorMessage = "errorMessage";
