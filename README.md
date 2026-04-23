@@ -54,3 +54,5 @@ shincodeさんの解説は、初めてライブラリを触る人からある程
 * AppRouter版のディレクトリ構造を間違えていたため修正
 * AppRouter版のparams取得方法を間違えていたため修正
 * NextResponseの基本的な使い方を学習
+* PrismaClientの使い方を再学習
+* pinoを初導入
