@@ -4,6 +4,6 @@ import { Logger } from "pino";
 declare namespace NodeJS {
   interface ProcessEnv {
     readonly DATABASE_URL: string;
-    readonly LOG_LEVEL: Omit<"silent", Logger["level"]>;
+    readonly LOG_LEVEL: Exclude<Logger["level"], "silent">;
   }
 }
