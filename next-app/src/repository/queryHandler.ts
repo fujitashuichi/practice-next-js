@@ -12,7 +12,7 @@ type HandlerProps<T> = {
   onError?: (err: unknown) => void
 }
 
-export const queryHandler = async <T>({
+export const queryHandler = <T>({
   queryFn,
   onError
 }: HandlerProps<T>) => {
