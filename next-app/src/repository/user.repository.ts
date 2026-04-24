@@ -1,19 +1,29 @@
 import { prisma } from "@/lib/prisma"
 import { logger } from "@/tools/log";
+import { queryHandler } from "./queryHandler";
+
+
 
 export class UserRepository {
   constructor() {}
 
 
-  connect = async () => {
-    try {
+  connect = queryHandler({
+    async queryFn() {
       await prisma.$connect();
-
       return logger.trace("Prisma connection succeed.");
-    } catch (e) {
-      logger.fatal(`Prisma connection failed.\n ${e}`);
-      throw e;
-
+    },
+    onError(err) {
+      logger.fatal(`Prisma connection failed.\n ${err}`);
     }
-  }
+  })
+
+  findMany = queryHandler({
+    async queryFn() {
+      return await prisma.project.findMany();
+    },
+    onError(err) {
+      console.error(err);
+    },
+  });
 }
