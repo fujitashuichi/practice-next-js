@@ -20,7 +20,7 @@ export class UserRepository {
 
   findMany = queryHandler({
     async queryFn() {
-      return await prisma.project.findMany();
+      return await prisma.user.findMany();
     },
     onError(err) {
       console.error(err);
