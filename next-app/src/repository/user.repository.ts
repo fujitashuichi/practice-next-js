@@ -3,6 +3,9 @@ import { logger } from "@/tools/log";
 import { queryHandler } from "./queryHandler";
 
 
+import { queryHandler } from "./queryHandler";
+
+
 
 export class UserRepository {
   constructor() {}
@@ -23,7 +26,7 @@ export class UserRepository {
       return await prisma.user.findMany();
     },
     onError(err) {
-      console.error(err);
+      logger.fatal(err);
     },
   });
 }
