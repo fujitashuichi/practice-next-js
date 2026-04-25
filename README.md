@@ -56,3 +56,6 @@ shincodeさんの解説は、初めてライブラリを触る人からある程
 * NextResponseの基本的な使い方を学習
 * PrismaClientの使い方を再学習
 * pinoを初導入
+
+**2026/04/24**
+* PrismaのQueryHandlerの作成と記事へのアウトプット

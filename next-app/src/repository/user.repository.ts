@@ -23,7 +23,7 @@ export class UserRepository {
       return await prisma.project.findMany();
     },
     onError(err) {
-      console.error(err);
+      logger.fatal(err);
     },
   });
 }

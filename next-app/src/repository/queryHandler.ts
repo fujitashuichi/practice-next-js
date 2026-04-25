@@ -1,8 +1,6 @@
 
 /* prisma 使用時のエラーハンドリングを共通化したもの */
 
-import { logger } from "@/tools/log";
-
 // queryFn に具体的なDB操作を設定する
 // errorHandler にはログ出力などの限定的な処理を設定する（任意）
 
