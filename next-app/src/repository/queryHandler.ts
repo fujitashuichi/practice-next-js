@@ -1,6 +1,7 @@
 
 /* prisma 使用時のエラーハンドリングを共通化したもの */
 
+
 // queryFn に具体的なDB操作を設定する
 // errorHandler にはログ出力などの限定的な処理を設定する（任意）
 
@@ -10,7 +11,7 @@ type HandlerProps<T> = {
   onError?: (err: unknown) => void
 }
 
-export const queryHandler = async <T>({
+export const queryHandler = <T>({
   queryFn,
   onError
 }: HandlerProps<T>) => {
