@@ -6,24 +6,23 @@
 // errorHandler にはログ出力などの限定的な処理を設定する（任意）
 
 
+
 type HandlerProps<T> = {
   queryFn: () => Promise<T>,
   onError?: (err: unknown) => void
 }
 
-export const queryHandler = <T>({
+export const queryHandler = async <T>({
   queryFn,
   onError
 }: HandlerProps<T>) => {
-  return async () => {
-    try {
-      return await queryFn();
-    } catch (err) {
-      if (onError) {
-        onError(err);
-      }
-
-      throw err;
+  try {
+    return await queryFn();
+  } catch (err) {
+    if (onError) {
+      onError(err);
     }
+
+    throw err;
   }
 }
