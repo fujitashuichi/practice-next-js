@@ -11,7 +11,7 @@ export const isUsersProject = async (req: Request, res: Response, next: NextFunc
     if (!userId) return next(new Error("先にauthMiddlewareを設定する必要があります"));
 
     const projectId = Number(req.params.id);
-    if (!projectId) return next(new Error("isUsersProjectは req.param.id を要します"));
+    if (Number.isNaN(projectId)) return next(new Error("isUsersProjectは req.param.id を要します"));
 
     const usersProjects: Project[] = await service.findByUserId(userId);
     const requiredProject: Project | null = await service.findById(projectId);
