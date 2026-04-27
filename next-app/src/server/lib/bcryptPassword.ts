@@ -4,7 +4,7 @@ import { DbUser } from "../types";
 
 const SaltRounds = 10;
 
-export const hashPassword = async (password: DbUser["passwordHash"]) => {
+export const hashPassword = async (password: string) => {
   return await bcrypt.hash(password, SaltRounds);
 }
 
