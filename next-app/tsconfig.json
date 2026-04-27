@@ -20,7 +20,9 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@/schemas": ["./src/schemas/index.ts"]
+      "@/schemas": ["./src/schemas/index.ts"],
+      "@/server": ["./src/server/index.ts"],
+      "@/auth": ["./src/auth.ts"]
     }
   },
   "include": [
