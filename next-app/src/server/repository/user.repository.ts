@@ -2,13 +2,14 @@ import { prisma } from "@/lib/prisma"
 import { logger } from "@/tools/log";
 import { queryHandler } from "./queryHandler";
 import { User } from "@/schemas";
-import { DbUser, SaveUserPayload } from "../types";
+import { SaveUserPayload } from "../types";
 
 
 export class UserRepository {
   constructor() {}
 
   // 認証などに使わないものはselectを必須にする
+  // これによって、passwordHash が外部に漏れることを防ぐ
   private readonly select = {
     id: true,
     email: true,
@@ -16,7 +17,7 @@ export class UserRepository {
   }
 
 
-  findMany = async (): Promise<User[]> => {
+  findMany = async () => {
     return queryHandler({
       queryFn: async () => {
         return await prisma.user.findMany({ select: this.select });
@@ -28,7 +29,7 @@ export class UserRepository {
   }
 
 
-  saveUser = async (data: SaveUserPayload): Promise<User | null> => {
+  createUser = async (data: SaveUserPayload) => {
     return queryHandler({
       queryFn: async () => {
         return await prisma.user.create({ data, select: this.select })
@@ -39,12 +40,15 @@ export class UserRepository {
     })
   }
 
-  deleteUser = async (id: User["id"]): Promise<User | null> => {
-    // Foreign_key制約によって、プロジェクトの削除が必須
-    await prisma.project.deleteMany({ where: { userId: id } });
+  deleteUser = async (id: User["id"]) => {
     return queryHandler({
       queryFn: async () => {
-        return await prisma.user.delete({ where: { id } })
+        // Foreign_key制約によって、プロジェクトの削除が必須
+        const [, result] = await prisma.$transaction([
+          prisma.project.deleteMany({ where: { userId: id } }),
+          prisma.user.delete({ where: { id }, select: this.select })
+        ]);
+        return result;
       },
       onError(err) {
         logger.fatal(err);
@@ -52,7 +56,7 @@ export class UserRepository {
     });
   }
 
-  findById = async (id: User["id"]): Promise<User | null> => {
+  findById = async (id: User["id"]) => {
     return queryHandler({
       queryFn: async () => {
         return await prisma.user.findUnique({ where: { id }, select: this.select })
@@ -63,7 +67,7 @@ export class UserRepository {
     });
   }
 
-  findByEmail = async (email: User["email"]): Promise<User | null> => {
+  findByEmail = async (email: User["email"]) => {
     return queryHandler({
       queryFn: async () => {
         return await prisma.user.findUnique({ where: { email }, select: this.select })
@@ -76,7 +80,7 @@ export class UserRepository {
 
 
   // 認証用には passwordHash を含める
-  findByEmailForAuthOnly = async (email: string): Promise<DbUser | null> => {
+  findByEmailForAuthOnly = async (email: string) => {
     return queryHandler({
       queryFn: async () => {
         return await prisma.user.findUnique({ where: { email } })

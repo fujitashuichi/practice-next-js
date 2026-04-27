@@ -5,10 +5,12 @@ import { prisma } from "@/lib/prisma";
 import { SaveProjectPayload, UpdateProjectPayload } from "../types";
 
 export class ProjectsRepository {
-  saveProject = async (data: SaveProjectPayload): Promise<Project | null> => {
+  constructor() {}
+
+  saveProject = async (data: SaveProjectPayload) => {
     return queryHandler({
       queryFn: async () => {
-        return prisma.project.create({ data })
+        return await prisma.project.create({ data })
       },
       onError(err) {
         logger.fatal(err);
@@ -16,7 +18,7 @@ export class ProjectsRepository {
     });
   }
 
-  updateProject = async (data: UpdateProjectPayload, id: Project["id"]): Promise<Project | null> => {
+  updateProject = async (data: UpdateProjectPayload, id: Project["id"]) => {
     return queryHandler({
       queryFn: async () => {
         return await prisma.project.update({ data, where: { id } })
@@ -27,7 +29,7 @@ export class ProjectsRepository {
     });
   }
 
-  deleteProject = async (id: Project["id"]): Promise<Project | null> => {
+  deleteProject = async (id: Project["id"]) => {
     return queryHandler({
       queryFn: async () => {
         return await prisma.project.delete({ where: { id } })
@@ -39,7 +41,7 @@ export class ProjectsRepository {
   }
 
 
-  findById = async (id: Project["id"]): Promise<Project | null> => {
+  findById = async (id: Project["id"]) => {
     return queryHandler({
       queryFn: async () => {
         return await prisma.project.findUnique({ where: { id } })
@@ -50,7 +52,7 @@ export class ProjectsRepository {
     });
   }
 
-  findByUserId = async (userId: Project["userId"]): Promise<Project[] | null> => {
+  findByUserId = async (userId: Project["userId"]) => {
     return queryHandler({
       queryFn: async () => {
         return await prisma.project.findMany({ where: { userId } })
@@ -61,7 +63,7 @@ export class ProjectsRepository {
     });
   }
 
-  findByTitle = async (title: Project["title"]): Promise<Project[] | null> => {
+  findByTitle = async (title: Project["title"]) => {
     return queryHandler({
       queryFn: async () => {
         return await prisma.project.findMany({ where: { title } })
