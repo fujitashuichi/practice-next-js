@@ -1,20 +1,21 @@
-import { User } from "@/schemas";
+import { SaveUserDto, User } from "@/schemas";
 import { UserRepository } from "../repository";
-import { SaveUserPayload } from "../types";
 import { EmailAlreadyRegisteredError, UserUndefinedError } from "../error";
 import { hashPassword } from "../lib";
+import z from "zod";
+
 
 export class RegisterService {
   private userRepository = new UserRepository();
 
 
-  createUser = async (dto: SaveUserPayload): Promise<{ user: User }> => {
+  createUser = async (dto: SaveUserDto): Promise<{ user: User }> => {
     if (await this.userRepository.findByEmail(dto.email) !== null) {
       console.error(`${dto.email}: already registered`);
       throw new EmailAlreadyRegisteredError(dto.email);
     }
 
-    const hashed = await hashPassword(dto.passwordHash);
+    const hashed = await hashPassword(dto.password);
 
     const newUser = {
       email: dto.email,
