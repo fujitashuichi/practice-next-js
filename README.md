@@ -59,3 +59,8 @@ shincodeさんの解説は、初めてライブラリを触る人からある程
 
 **2026/04/24**
 * PrismaのQueryHandlerの作成と記事へのアウトプット
+
+**2026/04/06**
+* repositoryを移植
+* 型定義の置き方を再考
+* queryHandlerの修正

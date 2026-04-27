@@ -10,3 +10,10 @@ export const ProjectSchema = z.object({
   updatedAt: z.coerce.date()
 });
 export type Project = z.infer<typeof ProjectSchema>;
+
+
+export const ProjectWithoutTimeSchema = ProjectSchema.omit({
+  createdAt: true,
+  updatedAt: true
+});
+export type ProjectWithoutTime = z.infer<typeof ProjectWithoutTimeSchema>;
