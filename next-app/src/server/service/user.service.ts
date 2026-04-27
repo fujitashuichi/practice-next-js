@@ -1,9 +1,8 @@
-import { UsersRepository } from "../repository/index.js";
-import { User } from "@pkg/shared";
-
+import { User } from "@/schemas";
+import { UserRepository } from "../repository";
 
 export class UserService {
-  private readonly repository = new UsersRepository();
+  private readonly repository = new UserRepository();
 
   findById = async (id: User["id"]) => {
     return await this.repository.findById(id);
