@@ -1,17 +1,16 @@
 import { signIn } from "@/auth"
-import { AppButton } from "@/components"
 
 export function SigninForm() {
   return (
     <form
       action={async () => {
         "use server"
-        await signIn("github")
+        await signIn("github", { redirectTo: "/" })
       }}
     >
-      <AppButton variant="primary">
+      <button type="submit">
         Signin with GitHub
-      </AppButton>
+      </button>
     </form>
   )
 }
