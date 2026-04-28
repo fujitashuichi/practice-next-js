@@ -6,6 +6,7 @@ declare global {
     interface ProcessEnv {
       readonly DATABASE_URL: string;
       readonly LOG_LEVEL: Exclude<Logger["level"], "silent">;
+      readonly AUTH_URL: string;
     }
   }
 }

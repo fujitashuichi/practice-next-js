@@ -2,7 +2,6 @@ import { SaveUserDto, User } from "@/schemas";
 import { UserRepository } from "../repository";
 import { EmailAlreadyRegisteredError, UserUndefinedError } from "../error";
 import { hashPassword } from "../lib";
-import z from "zod";
 
 
 export class RegisterService {
