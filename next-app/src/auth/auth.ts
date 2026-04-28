@@ -7,13 +7,10 @@ const config: NextAuthConfig = {
   basePath: "/api/auth",
   callbacks: {
     authorized({ auth }) {
-      console.log("authorized run");
-
       try {
         const isLoggedIn = !!auth?.user;
         if (!isLoggedIn) return false;
 
-        Response.redirect("/");
         return true;
       } catch (err) {
         logger.fatal(err);
