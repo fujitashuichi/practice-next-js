@@ -6,7 +6,7 @@ async function handleSignIn() {
   await signIn("github", { redirectTo: "/" })
 }
 
-export async function SigninForm() {
+export async function SigninButton() {
   return (
     <form action={handleSignIn}>
       <button type="submit">
