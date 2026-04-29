@@ -18,12 +18,6 @@ export async function UserCard() {
               <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Email address</h2>
               <p className="text-lg font-medium text-slate-900 break-all">{user.email}</p>
             </div>
-            <div className="space-y-1">
-              <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Created at</h2>
-              <p className="text-lg font-medium text-slate-900">
-                {new Date(session.expires).toLocaleString()}
-              </p>
-            </div>
           </div>
 
           <div className="pt-6 border-t border-slate-100 flex justify-end">
