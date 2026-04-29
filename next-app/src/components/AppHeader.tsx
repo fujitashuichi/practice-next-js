@@ -2,6 +2,7 @@ import Link from "next/link";
 import { AppButton } from "./AppButton";
 import { projectsMock } from "@/__mock__/projects.Mock";
 import { auth } from "@/auth";
+import { SignoutButton } from "@/auth/components";
 
 
 export async function AppHeader() {
@@ -53,14 +54,7 @@ export async function AppHeader() {
               Dashboard
             </AppButton>
           </Link>
-          {
-            <AppButton variant="danger">
-              LogoutButton（仮）
-            </AppButton>
-            /*
-            <LogoutButton />
-            */
-          }
+          <SignoutButton />
         </div>
       </nav>
     </header>
