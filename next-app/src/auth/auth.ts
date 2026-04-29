@@ -6,8 +6,8 @@ const config: NextAuthConfig = {
   providers: [GitHub],
   basePath: "/api/auth",
   callbacks: {
-    async redirect({ baseUrl }) {
-      return `${baseUrl}/dashboard`
+    async redirect({ url, baseUrl }) {
+      return url.startsWith(baseUrl) ? url : `${baseUrl}/dashboard`
     },
     authorized({ auth }) {
       try {
