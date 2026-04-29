@@ -1,44 +1,32 @@
 "use client";
 
-import { AppButton, AppHeader } from "@/components";
+import { AppButton } from "@/components";
 import Link from "next/link";
 import { get7daysProjects } from "../lib";
 import { Project } from "@/schemas/project";
-import { useEffect, useState } from "react";
-import { userMock } from "@/__mock__/userMock";
 import { projectsMock } from "@/__mock__/projects.Mock";
+import { useTimeKeeper } from "./timeKeeper";
+import React from "react";
 
-export default function DashBoard() {
-  const [time, setTime] = useState<Date | null>(null);
-
-  useEffect(() => {
-    const checkTime = () => setTime(new Date());
-    const timerId = setInterval(() => {
-      checkTime();
-    }, 5 * 60 * 1000);
-    checkTime();
-
-    return () => clearInterval(timerId);
-  }, []);
+export default function DashBoard({ header }: { header: React.ReactNode }) {
+  const { time } = useTimeKeeper();
 
 
   /* original → /
   const { useUser, session } = useAuth();
   const { projectsData } = useProject();
 
-  const { user } = useUser;
   const { projects } = projectsData;
   /* ← original */
 
   /* mock → */
-  const user = userMock;
   const projects = projectsMock;
   /* ← mock */
 
 
   return (
     <div className="mx-auto min-h-screen bg-slate-50/50 text-slate-900 font-sans selection:bg-blue-100">
-      <AppHeader user={user} />
+      {header}
       <main className="max-w-(--size-7xl) mx-auto pt-32 pb-20 px-6 flex flex-col items-center">
         <div className="w-full max-w-3xl animate-in slide-in-from-bottom-4 duration-700 ease-out">
           {time === null
