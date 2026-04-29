@@ -7,7 +7,7 @@ const config: NextAuthConfig = {
   basePath: "/api/auth",
   callbacks: {
     async redirect({ url, baseUrl }) {
-      return url.startsWith(baseUrl) ? url : baseUrl
+      return url.startsWith(baseUrl) ? url : `${baseUrl}/dashboard`
     },
     authorized({ auth }) {
       try {

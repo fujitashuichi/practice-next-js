@@ -23,7 +23,8 @@
       "@/schemas": ["./src/schemas/index.ts"],
       "@/server": ["./src/server/index.ts"],
       "@/auth": ["./src/auth"],
-      "@/tools": ["./src/tools"]
+      "@/tools": ["./src/tools"],
+      "@/lib": ["./src/lib"],
     }
   },
   "include": [
