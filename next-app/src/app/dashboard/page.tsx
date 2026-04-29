@@ -1,5 +1,3 @@
-"use server";
-
 import { AppHeader } from "@/components";
 import DashBoard from "./Dashboard";
 
