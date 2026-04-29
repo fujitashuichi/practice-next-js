@@ -1,7 +1,11 @@
 import { auth } from "@/auth";
+import { Introduction } from "@/components";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   const session = await auth();
 
-  return session?.user;
+  if (!session?.user) return <Introduction />;
+
+  return redirect("/dashboard");
 }

@@ -1,11 +1,5 @@
-import { auth } from "@/auth";
-import { Introduction } from "@/components";
 import DashBoard from "./Dashboard";
 
-export default async function Page() {
-  const session = await auth();
-
-  if (!session?.user) return <Introduction />
-
+export default function Page() {
   return <DashBoard />
 }
