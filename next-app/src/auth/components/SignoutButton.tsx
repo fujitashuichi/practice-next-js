@@ -6,11 +6,16 @@ import { AppButton } from "@/components";
 
 export async function SignoutButton() {
   return (
-    <AppButton variant="danger" type="submit" onClick={async () => {
-      "use server"
-      await signOut({ redirectTo: "/" })
-    }}>
-      Sign out
-    </AppButton>
+    <form
+      className="m-0 p-0"
+      action={async () => {
+        "use server"
+        await signOut({ redirectTo: "/" })
+      }
+    }>
+      <AppButton variant="danger" type="submit">
+        Sign out
+      </AppButton>
+    </form>
   )
 }
