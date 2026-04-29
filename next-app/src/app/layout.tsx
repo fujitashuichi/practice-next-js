@@ -25,8 +25,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
-
-  if (!session?.user) return <SigninForm />
+  const isSessionActive = !!session?.user;
 
   return (
     <html
@@ -35,9 +34,9 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {
-          !session.user
-            ? <SigninForm />
-            : <>{children}</>
+          isSessionActive
+            ? <>{children}</>
+            : <SigninForm />
         }
       </body>
     </html>
