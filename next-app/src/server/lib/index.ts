@@ -1,2 +1,2 @@
-export { hashPassword, comparePassword } from "./bcryptPassword.js"
-export { prisma } from "./prisma.js"
+export { hashPassword, comparePassword } from "./bcryptPassword"
+export { prisma } from "./prisma"

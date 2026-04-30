@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt";
-import { InvalidPasswordError } from "../error/index.js";
-import { DbUser } from "../types";
+import { InvalidPasswordError } from "../error";
 
 const SaltRounds = 10;
 

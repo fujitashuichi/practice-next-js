@@ -1,5 +1,5 @@
-import { ResponseErrorName } from "@pkg/shared";
-import { ResponseError } from "./ResponseError.js";
+import { ResponseErrorName } from "../types";
+import { ResponseError } from "./ResponseError";
 
 export class ProjectError extends ResponseError {
   constructor(message: string, errorName: ResponseErrorName) {

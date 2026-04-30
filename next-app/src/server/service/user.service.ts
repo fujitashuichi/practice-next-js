@@ -7,7 +7,6 @@ export class UserService {
   private readonly repository = new UserRepository();
 
 
-
   createUser = async (dto: SaveUserDto): Promise<{ user: User }> => {
     if (await this.repository.findByEmail(dto.email) !== null) {
       console.error(`${dto.email}: already registered`);

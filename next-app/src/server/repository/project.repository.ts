@@ -1,8 +1,8 @@
 import { Project } from "@/schemas/project";
 import { queryHandler } from "./queryHandler";
 import { logger } from "@/tools/log";
-import { prisma } from "@/lib/prisma";
 import { SaveProjectPayload, UpdateProjectPayload } from "../types";
+import { prisma } from "../lib";
 
 export class ProjectsRepository {
   constructor() {}
