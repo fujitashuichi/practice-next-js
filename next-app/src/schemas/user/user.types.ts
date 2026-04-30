@@ -9,15 +9,3 @@ export const UserSchema = z.object({
   createdAt: z.coerce.date()
 });
 export type User = z.infer<typeof UserSchema>;
-
-
-export const UserWithoutTimeSchema = UserSchema.omit({
-  createdAt: true
-});
-export type UserWithoutTime = z.infer<typeof UserWithoutTimeSchema>;
-
-
-export const SaveUserDtoSchema = UserWithoutTimeSchema.extend({
-  password: z.string().min(8).max(30)
-});
-export type SaveUserDto = z.infer<typeof SaveUserDtoSchema>;

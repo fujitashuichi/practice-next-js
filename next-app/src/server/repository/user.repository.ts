@@ -1,7 +1,6 @@
 import { logger } from "@/tools/log";
 import { queryHandler } from "./queryHandler";
 import { User } from "@/schemas";
-import { SaveUserPayload } from "../types";
 import { prisma } from "@/lib";
 
 
