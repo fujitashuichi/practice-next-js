@@ -77,17 +77,4 @@ export class UserRepository {
       },
     })
   }
-
-
-  // 認証用には passwordHash を含める
-  findByEmailForAuthOnly = async (email: string) => {
-    return queryHandler({
-      queryFn: async () => {
-        return await prisma.user.findUnique({ where: { email } })
-      },
-      onError(err) {
-        logger.fatal(err);
-      },
-    });
-  }
 }
