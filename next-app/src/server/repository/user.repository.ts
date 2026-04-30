@@ -11,8 +11,7 @@ export class UserRepository {
   // これによって、passwordHash が外部に漏れることを防ぐ
   private readonly select = {
     id: true,
-    email: true,
-    createdAt: true,
+    email: true
   }
 
 
