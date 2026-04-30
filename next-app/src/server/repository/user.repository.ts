@@ -1,8 +1,8 @@
-import { prisma } from "@/lib/prisma"
 import { logger } from "@/tools/log";
 import { queryHandler } from "./queryHandler";
 import { User } from "@/schemas";
 import { SaveUserPayload } from "../types";
+import { prisma } from "../lib";
 
 
 export class UserRepository {
@@ -76,18 +76,5 @@ export class UserRepository {
         logger.fatal(err);
       },
     })
-  }
-
-
-  // 認証用には passwordHash を含める
-  findByEmailForAuthOnly = async (email: string) => {
-    return queryHandler({
-      queryFn: async () => {
-        return await prisma.user.findUnique({ where: { email } })
-      },
-      onError(err) {
-        logger.fatal(err);
-      },
-    });
   }
 }

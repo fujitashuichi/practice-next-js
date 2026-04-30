@@ -13,7 +13,6 @@ export default function DashBoard({ header }: { header: React.ReactNode }) {
 
 
   /* original → /
-  const { useUser, session } = useAuth();
   const { projectsData } = useProject();
 
   const { projects } = projectsData;

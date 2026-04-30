@@ -1,8 +1,11 @@
+import { prisma } from "@/server/lib";
 import { logger } from "@/tools/log";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth, { NextAuthConfig } from "next-auth"
 import GitHub from "next-auth/providers/github"
 
 const config: NextAuthConfig = {
+  adapter: PrismaAdapter(prisma),
   providers: [GitHub],
   basePath: "/api/auth",
   callbacks: {
