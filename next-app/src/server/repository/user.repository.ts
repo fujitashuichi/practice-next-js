@@ -2,7 +2,7 @@ import { logger } from "@/tools/log";
 import { queryHandler } from "./queryHandler";
 import { User } from "@/schemas";
 import { SaveUserPayload } from "../types";
-import { prisma } from "../lib";
+import { prisma } from "@/lib";
 
 
 export class UserRepository {
@@ -29,17 +29,6 @@ export class UserRepository {
   }
 
 
-  createUser = async (data: SaveUserPayload) => {
-    return queryHandler({
-      queryFn: async () => {
-        return await prisma.user.create({ data, select: this.select })
-      },
-      onError(err) {
-        logger.fatal(err);
-      },
-    })
-  }
-
   deleteUser = async (id: User["id"]) => {
     return queryHandler({
       queryFn: async () => {
@@ -65,16 +54,5 @@ export class UserRepository {
         logger.fatal(err);
       },
     });
-  }
-
-  findByEmail = async (email: User["email"]) => {
-    return queryHandler({
-      queryFn: async () => {
-        return await prisma.user.findUnique({ where: { email }, select: this.select })
-      },
-      onError(err) {
-        logger.fatal(err);
-      },
-    })
   }
 }
