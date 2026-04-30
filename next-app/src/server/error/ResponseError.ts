@@ -1,4 +1,4 @@
-import { ResponseErrorName } from "@pkg/shared";
+import { ResponseErrorName } from "../types/responseErrorNames.types";
 
 export class ResponseError extends Error {
   constructor(message: string, errorName: ResponseErrorName) {

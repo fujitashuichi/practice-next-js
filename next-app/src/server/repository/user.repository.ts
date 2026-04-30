@@ -1,8 +1,7 @@
 import { logger } from "@/tools/log";
 import { queryHandler } from "./queryHandler";
 import { User } from "@/schemas";
-import { SaveUserPayload } from "../types";
-import { prisma } from "../lib";
+import { prisma } from "@/lib";
 
 
 export class UserRepository {
@@ -12,8 +11,7 @@ export class UserRepository {
   // これによって、passwordHash が外部に漏れることを防ぐ
   private readonly select = {
     id: true,
-    email: true,
-    createdAt: true,
+    email: true
   }
 
 
@@ -28,17 +26,6 @@ export class UserRepository {
     });
   }
 
-
-  createUser = async (data: SaveUserPayload) => {
-    return queryHandler({
-      queryFn: async () => {
-        return await prisma.user.create({ data, select: this.select })
-      },
-      onError(err) {
-        logger.fatal(err);
-      },
-    })
-  }
 
   deleteUser = async (id: User["id"]) => {
     return queryHandler({
@@ -65,16 +52,5 @@ export class UserRepository {
         logger.fatal(err);
       },
     });
-  }
-
-  findByEmail = async (email: User["email"]) => {
-    return queryHandler({
-      queryFn: async () => {
-        return await prisma.user.findUnique({ where: { email }, select: this.select })
-      },
-      onError(err) {
-        logger.fatal(err);
-      },
-    })
   }
 }

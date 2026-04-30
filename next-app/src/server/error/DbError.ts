@@ -1,4 +1,4 @@
-import { ResponseError } from "./ResponseError.js";
+import { ResponseError } from "./ResponseError";
 
 class DatabaseError extends ResponseError {
   constructor(database: string, table: string, operation: string) {

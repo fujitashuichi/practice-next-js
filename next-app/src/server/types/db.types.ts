@@ -17,8 +17,8 @@ export const SaveUserPayloadSchema = UserWithoutTimeSchema.omit({
 export type SaveUserPayload = z.infer<typeof SaveUserPayloadSchema>
 
 
-export const SaveProjectPayloadSchema = ProjectWithoutTimeSchema.omit({ id: true });
-export type SaveProjectPayload = z.infer<typeof SaveProjectPayloadSchema>;
+export const CreateProjectPayloadSchema = ProjectWithoutTimeSchema.omit({ id: true });
+export type CreateProjectPayload = z.infer<typeof CreateProjectPayloadSchema>;
 
 
 export const UpdateProjectPayloadSchema = ProjectWithoutTimeSchema

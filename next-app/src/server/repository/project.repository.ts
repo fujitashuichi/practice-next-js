@@ -1,13 +1,13 @@
 import { Project } from "@/schemas/project";
 import { queryHandler } from "./queryHandler";
 import { logger } from "@/tools/log";
-import { prisma } from "@/lib/prisma";
-import { SaveProjectPayload, UpdateProjectPayload } from "../types";
+import { CreateProjectPayload, UpdateProjectPayload } from "../types";
+import { prisma } from "@/lib";
 
 export class ProjectsRepository {
   constructor() {}
 
-  saveProject = async (data: SaveProjectPayload) => {
+  createProject = async (data: CreateProjectPayload) => {
     return queryHandler({
       queryFn: async () => {
         return await prisma.project.create({ data })
@@ -56,17 +56,6 @@ export class ProjectsRepository {
     return queryHandler({
       queryFn: async () => {
         return await prisma.project.findMany({ where: { userId } })
-      },
-      onError(err) {
-        logger.fatal(err);
-      },
-    });
-  }
-
-  findByTitle = async (title: Project["title"]) => {
-    return queryHandler({
-      queryFn: async () => {
-        return await prisma.project.findMany({ where: { title } })
       },
       onError(err) {
         logger.fatal(err);
