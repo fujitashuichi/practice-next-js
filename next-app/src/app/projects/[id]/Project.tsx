@@ -1,7 +1,7 @@
 "use client";
 
 import { projectsMock } from "@/__mock__/projects.Mock";
-import { AppButton, AppLoadingBar } from "@/components";
+import { AppButton, AppLoadingBar } from "@/components/client";
 import { EditProjectModal } from "@/features/projects/components/EditProjectModal";
 import { type Project } from "@/schemas/project";
 import Link from "next/link";
@@ -10,8 +10,6 @@ import { useEffect, useState } from "react";
 
 export function Project({ id }: { id: Project["id"] }) {
   const [editing, setEditing] = useState<boolean>(false);
-
-  console.log(id);
 
   /* original → /
   const { projects, delete: deleteProjectHook } = useProject();

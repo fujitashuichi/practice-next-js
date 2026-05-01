@@ -1,4 +1,4 @@
-import { AppButton } from "@/components";
+import { AppButton } from "@/components/client";
 import { Project } from "@/schemas/project";
 import { EditProjectForm } from "./EditProjectForm";
 

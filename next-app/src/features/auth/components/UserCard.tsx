@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { AppButton } from "@/components";
+import { AppButton } from "@/components/client";
 import Link from "next/link";
 
 export async function UserCard() {

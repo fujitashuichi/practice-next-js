@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { UserSchema, UserWithoutTimeSchema } from "@/schemas";
+import { UserSchema } from "@/schemas";
 import { ProjectWithoutTimeSchema } from "@/schemas/project";
 import { schemaTransformer } from "./schemaTransformer";
 
@@ -9,7 +9,7 @@ export const DbUserSchema = UserSchema.extend({
 export type DbUser = z.infer<typeof DbUserSchema>;
 
 
-export const SaveUserPayloadSchema = UserWithoutTimeSchema.omit({
+export const SaveUserPayloadSchema = UserSchema.omit({
   id: true
 }).extend({
   passwordHash: z.string()

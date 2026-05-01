@@ -1,6 +1,5 @@
+import { AppButton, AppLoadingBar } from "@/components/client";
 import React, { useState } from "react";
-import { AppButton } from "../../../components";
-import { AppLoadingBar } from "../../../components/AppLoadingBar";
 
 
 export function CreateProjectForm() {

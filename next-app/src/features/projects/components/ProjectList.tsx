@@ -1,7 +1,7 @@
 "use client";
 
 import { projectsMock } from "@/__mock__/projects.Mock";
-import { AppLoadingBar } from "@/components";
+import { AppLoadingBar } from "@/components/client";
 import Link from "next/link";
 import { useState } from "react";
 import { CreateProjectForm } from "./CreateProjectForm";
