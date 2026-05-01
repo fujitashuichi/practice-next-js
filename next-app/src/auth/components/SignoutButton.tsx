@@ -1,7 +1,7 @@
 "use server";
 
 import { signOut } from "@/auth";
-import { AppButton } from "@/components/client";
+import { AppButton } from "@/components/AppButton";
 
 
 export async function SignoutButton() {

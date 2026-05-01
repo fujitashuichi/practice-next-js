@@ -1,6 +1,6 @@
-import { AppButton } from "@/components/client";
+import { AppButton } from "@/components/AppButton";
 import { Project } from "@/schemas/project";
-import { EditProjectForm } from "./EditProjectForm";
+import { EditProjectForm } from "./internal/EditProjectForm";
 
 export function EditProjectModal({ id, show, onClose }: { id: Project["id"], show: boolean, onClose: () => void }) {
   if (!show) return null;
