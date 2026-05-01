@@ -1,3 +1,5 @@
+"use server";
+
 import Link from "next/link";
 import { AppButton } from "./AppButton";
 import { projectsMock } from "@/__mock__/projects.Mock";
