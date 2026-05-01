@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { AppButton } from "./AppButton";
 import { projectsMock } from "@/__mock__/projects.Mock";
 import { auth } from "@/auth";
 import { SignoutButton } from "@/auth/components";
+import { AppButton } from "../client";
 
 
 export async function AppHeader() {
