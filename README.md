@@ -76,3 +76,10 @@ shincodeさんの解説は、初めてライブラリを触る人からある程
 * authフックの使い方を学習
 * これにより、自力でのsession管理を廃止
 * asyncコンポーネントとloading.tsxの併用を学習
+
+**2026/04/30**
+* PrismaAdaptorを追加
+* 利用するDBを検討
+
+**2026/05/01**
+* Vercel Postgres に同期
