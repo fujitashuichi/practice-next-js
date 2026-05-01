@@ -1,12 +1,12 @@
 "use client";
 
-import { AppButton } from "@/components";
 import Link from "next/link";
 import { get7daysProjects } from "../lib";
 import { Project } from "@/schemas/project";
 import { projectsMock } from "@/__mock__/projects.Mock";
 import { useTimeKeeper } from "./timeKeeper";
 import React from "react";
+import { AppButton } from "@/components/client";
 
 export default function DashBoard({ header }: { header: React.ReactNode }) {
   const { time } = useTimeKeeper();

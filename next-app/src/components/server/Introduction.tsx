@@ -1,4 +1,4 @@
-import { AppButton } from "@/components"
+import { AppButton } from "@/components/client"
 import Link from "next/link"
 
 export function Introduction() {
