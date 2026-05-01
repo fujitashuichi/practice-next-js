@@ -1,6 +1,6 @@
 "use client";
 
-import { AppButton, AppLoadingBar } from "@/components";
+import { AppButton, AppLoadingBar } from "@/components/client";
 import { Project } from "@/schemas/project";
 import React, { useEffect, useState } from "react";
 
