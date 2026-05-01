@@ -11,7 +11,7 @@ export const schemaTransformer = {
   toPrismaUpdate: <T extends Record<string, unknown>>(data: T) => {
     return Object.fromEntries(
       Object.entries(data)
-        .filter(([_, v]) => v !== undefined)
+        .filter(([, v]) => v !== undefined)
         .map(([k, v]) => [
           k,
           { set: v }
