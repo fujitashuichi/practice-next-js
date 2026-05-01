@@ -83,3 +83,6 @@ shincodeさんの解説は、初めてライブラリを触る人からある程
 
 **2026/05/01**
 * Vercel Postgres に同期
+
+**2026/05/01**
+* bundle-analyzerによる分析
