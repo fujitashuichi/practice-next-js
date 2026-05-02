@@ -1,6 +1,7 @@
 "use client";
 
-import { AppButton, AppLoadingBar } from "@/components/client";
+import { AppButton } from "@/components/AppButton";
+import { AppLoadingBar } from "@/components/AppLoadingBar";
 import { Project } from "@/schemas/project";
 import React, { useEffect, useState } from "react";
 
@@ -36,7 +37,6 @@ export function EditProjectForm({ id }: { id: Project["id"] }) {
 
   if (status === "error") return <ErrorView message={errorMessage} />
 
-  // success時はhook側でidle状態に復帰する
   return(
     <div className="mt-4 p-5 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center gap-4 animate-in fade-in slide-in-from-top-2 duration-500">
       <div className="flex-none flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600">

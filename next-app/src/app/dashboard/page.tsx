@@ -1,4 +1,4 @@
-import { AppHeader } from "@/components/server";
+import { AppHeader } from "@/components/AppHeader";
 import DashBoard from "./Dashboard";
 
 export default async function Page() {

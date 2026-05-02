@@ -1,4 +1,4 @@
-import { UserCard } from "@/features";
+import { UserCard } from "@/features/auth/components/UserCard";
 
 
 export function User() {

@@ -1,10 +1,10 @@
 "use client";
 
 import { projectsMock } from "@/__mock__/projects.Mock";
-import { AppLoadingBar } from "@/components/client";
+import { AppLoadingBar } from "@/components/AppLoadingBar";
 import Link from "next/link";
 import { useState } from "react";
-import { CreateProjectForm } from "./CreateProjectForm";
+import { CreateProjectForm } from "./internal/CreateProjectForm";
 
 export function ProjectList() {
   /* original　→ /
