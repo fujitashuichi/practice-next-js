@@ -2,7 +2,7 @@ import Link from "next/link";
 import { projectsMock } from "@/__mock__/projects.Mock";
 import { auth } from "@/auth";
 import { SignoutButton } from "@/auth/components";
-import { AppButton } from "../client";
+import { AppButton } from "./AppButton";
 
 
 export async function AppHeader() {

@@ -1,4 +1,5 @@
-import { AppButton, AppLoadingBar } from "@/components/client";
+import { AppButton } from "@/components/AppButton";
+import { AppLoadingBar } from "@/components/AppLoadingBar";
 import React, { useState } from "react";
 
 

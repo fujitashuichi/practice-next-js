@@ -1,7 +1,8 @@
 "use client";
 
 import { projectsMock } from "@/__mock__/projects.Mock";
-import { AppButton, AppLoadingBar } from "@/components/client";
+import { AppButton } from "@/components/AppButton";
+import { AppLoadingBar } from "@/components/AppLoadingBar";
 import { EditProjectModal } from "@/features/projects/components/EditProjectModal";
 import { type Project } from "@/schemas/project";
 import Link from "next/link";

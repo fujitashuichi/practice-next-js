@@ -1,4 +1,4 @@
-import { AppLoadingBar } from '@/components/client'
+import { AppLoadingBar } from '@/components/AppLoadingBar'
 
 export default function Loading() {
   return (

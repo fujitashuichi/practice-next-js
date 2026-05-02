@@ -6,7 +6,7 @@ import { Project } from "@/schemas/project";
 import { projectsMock } from "@/__mock__/projects.Mock";
 import { useTimeKeeper } from "./timeKeeper";
 import React from "react";
-import { AppButton } from "@/components/client";
+import { AppButton } from "@/components/AppButton";
 
 export default function DashBoard({ header }: { header: React.ReactNode }) {
   const { time } = useTimeKeeper();
