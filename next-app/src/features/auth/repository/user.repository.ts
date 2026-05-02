@@ -1,5 +1,5 @@
 import { logger } from "@/tools/log";
-import { queryHandler } from "./queryHandler";
+import { queryHandler } from "../../internal/queryHandler";
 import { User } from "@/schemas";
 import { prisma } from "@/lib";
 

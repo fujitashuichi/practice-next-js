@@ -1,7 +1,7 @@
 import { Project } from "@/schemas/project";
-import { queryHandler } from "./queryHandler";
+import { queryHandler } from "../../internal/queryHandler";
 import { logger } from "@/tools/log";
-import { CreateProjectPayload, UpdateProjectPayload } from "../types";
+import { CreateProjectPayload, UpdateProjectPayload } from "../../types";
 import { prisma } from "@/lib";
 
 export class ProjectsRepository {
