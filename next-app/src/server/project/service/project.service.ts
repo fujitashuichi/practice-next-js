@@ -9,24 +9,37 @@ export class ProjectService {
   constructor () {}
 
 
-  createProject = async (data: CreateProjectPayload) => {
-    return await this.repository.createProject(data);
+  createProject = async (data: CreateProjectPayload): Promise<Project> => {
+    const createdAt = new Date();
+    const result = await this.repository.createProject(data);
+
+    return {
+      ...result,
+      createdAt,
+      updatedAt: createdAt
+    }
   }
 
-  updateProject = async (data: UpdateProjectPayload, id: Project["id"]) => {
-    return await this.repository.updateProject(data, id);
+  updateProject = async (data: UpdateProjectPayload, id: Project["id"]): Promise<Project> => {
+    const updatedAt = new Date();
+    const result = await this.repository.updateProject(data, id);
+
+    return {
+      ...result,
+      updatedAt
+    }
   }
 
-  deleteProject = async (id: Project["id"]) => {
+  deleteProject = async (id: Project["id"]): Promise<Project> => {
     return await this.repository.deleteProject(id);
   }
 
 
-  findById = async (id: Project["id"]) => {
+  findById = async (id: Project["id"]): Promise<Project | null> => {
     return await this.repository.findById(id);
   }
 
-  findByUserId = async (userId: Project["userId"]) => {
+  findByUserId = async (userId: Project["userId"]): Promise<Project[]> => {
     return await this.repository.findByUserId(userId);
   }
 }
