@@ -1,7 +1,7 @@
 import { logger } from "@/tools/log";
-import { queryHandler } from "../../internal/queryHandler";
-import { User } from "@/schemas";
+import { User } from "@/schemas/user";
 import { prisma } from "@/lib";
+import { queryHandler } from "@/server/project/repository/internal/queryHandler";
 
 
 export class UserRepository {

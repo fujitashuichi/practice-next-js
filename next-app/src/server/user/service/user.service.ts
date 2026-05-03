@@ -1,4 +1,4 @@
-import { User } from "@/schemas";
+import { User } from "@/schemas/user";
 import { UserRepository } from "../repository";
 
 export class UserService {
