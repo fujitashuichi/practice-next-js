@@ -53,7 +53,7 @@ const update = async (formData: FormData, id: Project["id"]): Promise<ActionResu
 
 
 const remove = async (id: Project["id"]): Promise<ActionResult<Project>> => {
-  const parsed = ProjectSchema.pick({ id: true }).safeParse(id);
+  const parsed = ProjectSchema.pick({ id: true }).safeParse({ id });
 
   if (!parsed.success) {
     return {
