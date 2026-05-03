@@ -1,4 +1,4 @@
-import { User } from "@/schemas";
+import { User } from "@/schemas/user";
 
 export const userMock: User = {
   id: "5f48b813-f434-4b52-9214-7299066bf9b2",

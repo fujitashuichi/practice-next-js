@@ -1,4 +1,4 @@
-import { ResponseErrorName } from "../types/responseErrorNames.types";
+import { ResponseErrorName } from "@/schemas/error";
 import { ResponseError } from "./ResponseError";
 
 export class AuthError extends ResponseError {
