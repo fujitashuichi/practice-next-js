@@ -1,1 +1,0 @@
-export { ProjectsRepository } from "./project.repository"
