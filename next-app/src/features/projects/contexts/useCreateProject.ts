@@ -28,16 +28,22 @@ export const useCreateProject = (): Hook => {
     reset();
     setStatus("pending");
 
-    const result = await projectActions.create(formData);
+    try {
+      const result = await projectActions.create(formData);
 
-    if (!result.success) {
-      setErrorMessage(errorMap[result.errorName] ?? "エラーが発生しました");
+      if (!result.success) {
+        setErrorMessage(errorMap[result.errorName] ?? "エラーが発生しました");
+        setStatus("error");
+        return null;
+      }
+
+      setStatus("success");
+      return result.data;
+    } catch {
+      setErrorMessage("エラーが発生しました");
       setStatus("error");
       return null;
     }
-
-    setStatus("success");
-    return result.data;
   }
 
 
