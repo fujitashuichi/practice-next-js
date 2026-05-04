@@ -11,7 +11,7 @@ import { CreateProjectPayloadSchema, UpdateProjectPayloadSchema } from "./types"
 const service = new ProjectService();
 
 
-const create = async (formData: FormData): Promise<ActionResult<Project>> => {
+export const createProjectAction = async (formData: FormData): Promise<ActionResult<Project>> => {
   const parsed = await parseFormData({
     formData,
     schema: CreateProjectPayloadSchema,
@@ -30,7 +30,7 @@ const create = async (formData: FormData): Promise<ActionResult<Project>> => {
   })
 }
 
-const update = async (formData: FormData, id: Project["id"]): Promise<ActionResult<Project>> => {
+export const updateProjectAction = async (formData: FormData, id: Project["id"]): Promise<ActionResult<Project>> => {
   const parsed = await parseFormData({
     formData,
     schema: UpdateProjectPayloadSchema,
@@ -52,7 +52,7 @@ const update = async (formData: FormData, id: Project["id"]): Promise<ActionResu
 }
 
 
-const remove = async (id: Project["id"]): Promise<ActionResult<Project>> => {
+export const removeProjectAction = async (id: Project["id"]): Promise<ActionResult<Project>> => {
   const parsed = ProjectSchema.pick({ id: true }).safeParse({ id });
 
   if (!parsed.success) {
@@ -68,6 +68,3 @@ const remove = async (id: Project["id"]): Promise<ActionResult<Project>> => {
     },
   })
 }
-
-
-export const projectActions = { create, update, remove };

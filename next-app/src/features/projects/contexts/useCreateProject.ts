@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ProjectCtxType } from "./project.contexts";
-import { projectActions } from "@/server/project/actions";
+import { createProjectAction } from "@/server/project/actions";
 import { ResponseErrorName } from "@/schemas/error";
 
 
@@ -28,7 +28,7 @@ export const useCreateProject = (): Hook => {
     reset();
     setStatus("pending");
 
-    const result = await projectActions.create(formData);
+    const result = await createProjectAction(formData);
 
     if (!result.success) {
       setErrorMessage(errorMap[result.errorName] ?? "エラーが発生しました");
