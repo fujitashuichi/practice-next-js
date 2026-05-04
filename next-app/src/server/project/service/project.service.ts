@@ -10,24 +10,15 @@ export class ProjectService {
 
 
   createProject = async (data: CreateProjectPayload): Promise<Project> => {
-    const createdAt = new Date();
     const result = await this.repository.createProject(data);
 
-    return {
-      ...result,
-      createdAt,
-      updatedAt: createdAt
-    }
+    return result;
   }
 
   updateProject = async (data: UpdateProjectPayload, id: Project["id"]): Promise<Project> => {
-    const updatedAt = new Date();
     const result = await this.repository.updateProject(data, id);
 
-    return {
-      ...result,
-      updatedAt
-    }
+    return result;
   }
 
   deleteProject = async (id: Project["id"]): Promise<Project> => {
