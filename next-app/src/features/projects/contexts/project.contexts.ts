@@ -15,27 +15,27 @@ type ProjectsData = {
 type GetProjects = {
   status: Status,
   errorMessage: string | null,
-  get: () => Promise<void>
+  get: () => Promise<Project[] | null>
 }
 
 type Create = {
   status: Status,
   errorMessage: string | null,
-  create: (e: React.SubmitEvent<HTMLFormElement>) => Promise<void>,
+  create: (formData: FormData) => Promise<Project | null>,
   reset: () => void
 };
 
 type Update = {
   status: Status,
   errorMessage: string | null,
-  update: (e: React.SubmitEvent<HTMLFormElement>, id: Project["id"]) => Promise<void>
+  update: (formData: FormData, id: Project["id"]) => Promise<Project | null>
   reset: () => void
 };
 
 type Delete = {
   status: Status,
   errorMessage: string | null,
-  delete: (id: Project["id"]) => Promise<void>
+  delete: (id: Project["id"]) => Promise<Project | null>
   reset: () => void
 };
 
