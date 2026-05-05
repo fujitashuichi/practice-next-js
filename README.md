@@ -95,3 +95,8 @@ shincodeさんの解説は、初めてライブラリを触る人からある程
 
 **2026/05/04**
 * serverActionをhooksで利用する学習
+
+**2026/05/05**
+* hooksをctxで配布
+* hooksをコンポーネントで使用
+* sync状態をlayoutでUI化
