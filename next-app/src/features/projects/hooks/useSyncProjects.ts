@@ -11,7 +11,7 @@ type Hook = ProjectCtxType["sync"];
 const errorMap: Partial<Record<ResponseErrorName, string>> = {
   "UnAuthorizedError": "ユーザーが認証されていません",
   "AuthError": "ユーザーが認証されていません",
-  "InvalidRequestDataError": "入力情報が正しくありません"
+  "InvalidRequestDataError": "不正なリクエストです"
 }
 
 
