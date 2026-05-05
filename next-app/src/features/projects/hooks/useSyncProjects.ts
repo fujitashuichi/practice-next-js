@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { ProjectCtxType } from "../contexts/context"
 import { ResponseErrorName } from "@/schemas/error";
-import { Project } from "@/schemas/project";
 import { getUsersProjectsAction } from "@/server/project/actions";
 
 
@@ -26,12 +25,12 @@ export const useSyncProjects = (setProjects: ProjectCtxType["projects"]["setProj
     setErrorMessage(null);
   }
 
-  const sync = async (userId: Project["userId"]) => {
+  const sync = async () => {
     reset();
     setStatus("pending");
 
     try {
-      const result = await getUsersProjectsAction(userId);
+      const result = await getUsersProjectsAction();
 
       if (!result.success) {
         setErrorMessage(errorMap[result.errorName] ?? "エラーが発生しました");

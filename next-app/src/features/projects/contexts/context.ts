@@ -15,7 +15,7 @@ type Projects = {
 type Sync = {
   status: Status,
   errorMessage: string | null,
-  sync: (userId: Project["userId"]) => Promise<void>,
+  sync: () => Promise<void>,
   reset: () => void
 }
 
