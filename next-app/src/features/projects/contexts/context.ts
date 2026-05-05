@@ -7,15 +7,16 @@ type Status = "idle" | "pending" | "error" | "success";
 
 /* 各Hookの型定義 ↓ */
 
-type ProjectsData = {
+type Projects = {
   projects: Project[],
   setProjects: React.Dispatch<SetStateAction<Project[]>>
 }
 
-type GetProjects = {
+type Sync = {
   status: Status,
   errorMessage: string | null,
-  get: () => Promise<Project[] | null>
+  sync: () => Promise<void>,
+  reset: () => void
 }
 
 type Create = {
@@ -32,10 +33,10 @@ type Update = {
   reset: () => void
 };
 
-type Delete = {
+type Remove = {
   status: Status,
   errorMessage: string | null,
-  delete: (id: Project["id"]) => Promise<Project | null>
+  remove: (id: Project["id"]) => Promise<Project | null>
   reset: () => void
 };
 
@@ -43,7 +44,7 @@ type Delete = {
 
 
 export type ProjectCtxType = {
-  projectsData: ProjectsData, getProjects: GetProjects, create: Create, update: Update, delete: Delete
+  projects: Projects, sync: Sync, create: Create, update: Update, remove: Remove
 };
 
 

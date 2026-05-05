@@ -6,6 +6,7 @@ import { parseFormData } from "../lib/parseFormData";
 import { ActionResult } from "../types/actionResult.types";
 import { ProjectService } from "./service/project.service";
 import { CreateProjectPayloadSchema, UpdateProjectPayloadSchema } from "./types";
+import { auth } from "@/auth";
 
 
 const service = new ProjectService();
@@ -65,6 +66,42 @@ export const removeProjectAction = async (id: Project["id"]): Promise<ActionResu
   return await actionHandler({
     async action() {
       return await service.deleteProject(id);
+    },
+  })
+}
+
+
+export const getUsersProjectsAction = async (): Promise<ActionResult<Project[]>> => {
+  const session = await auth();
+  const user = session?.user;
+
+  if (!user) {
+    return {
+      success: false,
+      errorName: "UnAuthorizedError"
+    }
+  }
+
+  const userId = user.id;
+  if (!userId) {
+    return {
+      success: false,
+      errorName: "AuthError"
+    }
+  }
+
+  const parsed = ProjectSchema.pick({ userId: true }).safeParse({ userId });
+
+  if (!parsed.success) {
+    return {
+      success: false,
+      errorName: "InvalidRequestDataError"
+    }
+  }
+
+  return await actionHandler({
+    async action() {
+      return await service.findByUserId(userId);
     },
   })
 }
