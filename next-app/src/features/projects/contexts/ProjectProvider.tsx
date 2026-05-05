@@ -7,22 +7,34 @@ import { useRemoveProject } from "../hooks/useRemoveProject";
 import { useSyncProjects } from "../hooks/useSyncProjects";
 import { useUpdateProject } from "../hooks/useUpdateProject";
 import { ProjectCtx, ProjectCtxType } from "./context";
+import { logger } from "@/tools/log";
 
 export function ProjectProvider({ children }: { children: React.ReactNode }) {
-  const projectHook = useProjects();
-  const syncProjectHook = useSyncProjects(projectHook.setProjects);
+  const projectsHook = useProjects();
+  const syncProjectHook = useSyncProjects(projectsHook.setProjects);
+
+  const { sync } = syncProjectHook;
+  const createProjectHook = useCreateProject(sync);
+  const updateProjectHook = useUpdateProject(sync);
+  const removeProjectHook = useRemoveProject(sync);
 
   const contexts: ProjectCtxType = {
-    projects: projectHook,
+    projects: projectsHook,
     sync: syncProjectHook,
-    create: useCreateProject(),
-    update: useUpdateProject(),
-    remove: useRemoveProject(),
+    create: createProjectHook,
+    update: updateProjectHook,
+    remove: removeProjectHook
   }
 
   useEffect(() => {
-    syncProjectHook.sync();
-  }, [])
+    const sync = async () => {
+      logger.trace("now syncing projects...");
+      await syncProjectHook.sync();
+      logger.trace("syncing projects finished.");
+    }
+
+    sync();
+  }, []);
 
   return (
     <ProjectCtx.Provider value={contexts}>

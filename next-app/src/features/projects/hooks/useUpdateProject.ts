@@ -16,7 +16,7 @@ const errorMap: Partial<Record<ResponseErrorName, string>> = {
 }
 
 
-export const useUpdateProject = (): Hook => {
+export const useUpdateProject = (sync: ProjectCtxType["sync"]["sync"]): Hook => {
   const [status, setStatus] = useState<Hook["status"]>("idle");
   const [errorMessage, setErrorMessage] = useState<Hook["errorMessage"]>(null);
 
@@ -39,6 +39,7 @@ export const useUpdateProject = (): Hook => {
       }
 
       setStatus("success");
+      await sync();
       return result.data;
     } catch {
       setErrorMessage("エラーが発生しました");
