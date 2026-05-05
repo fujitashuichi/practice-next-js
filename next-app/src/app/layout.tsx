@@ -30,20 +30,20 @@ export default async function RootLayout({
   const isSessionActive = !!session?.user;
 
   return (
-    <Providers>
-      <html
-        lang="en"
-        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      >
-        <body className="min-h-full flex flex-col">
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col">
+        <Providers>
           {
             isSessionActive
               ? <>{children}</>
               : <SigninButton />
           }
-        </body>
-      </html>
-    </Providers>
+        </Providers>
+      </body>
+    </html>
   );
 }
 
