@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { ProjectCtxType } from "./project.contexts";
-import { createProjectAction } from "@/server/project/actions";
+import { ProjectCtxType } from "../contexts/context";
+import { removeProjectAction } from "@/server/project/actions";
 import { ResponseErrorName } from "@/schemas/error";
+import { Project } from "@/schemas/project";
 
 
-type Hook = ProjectCtxType["create"];
+type Hook = ProjectCtxType["remove"];
 
 const errorMap: Partial<Record<ResponseErrorName, string>> = {
   "UnAuthorizedError": "ユーザーが認証されていません",
@@ -15,7 +16,7 @@ const errorMap: Partial<Record<ResponseErrorName, string>> = {
 }
 
 
-export const useCreateProject = (): Hook => {
+export const useRemoveProject = (): Hook => {
   const [status, setStatus] = useState<Hook["status"]>("idle");
   const [errorMessage, setErrorMessage] = useState<Hook["errorMessage"]>(null);
 
@@ -24,12 +25,12 @@ export const useCreateProject = (): Hook => {
     setErrorMessage(null);
   }
 
-  const create = async (formData: FormData) => {
+  const remove = async (id: Project["id"]) => {
     reset();
     setStatus("pending");
 
     try {
-      const result = await createProjectAction(formData);
+      const result = await removeProjectAction(id);
 
       if (!result.success) {
         setErrorMessage(errorMap[result.errorName] ?? "エラーが発生しました");
@@ -47,5 +48,5 @@ export const useCreateProject = (): Hook => {
   }
 
 
-  return { status, errorMessage, reset, create }
+  return { status, errorMessage, reset, remove }
 }

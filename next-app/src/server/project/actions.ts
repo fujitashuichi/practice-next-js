@@ -68,3 +68,21 @@ export const removeProjectAction = async (id: Project["id"]): Promise<ActionResu
     },
   })
 }
+
+
+export const getUsersProjectsAction = async (userId: Project["userId"]): Promise<ActionResult<Project[]>> => {
+  const parsed = ProjectSchema.pick({ userId: true }).safeParse({ userId });
+
+  if (!parsed.success) {
+    return {
+      success: false,
+      errorName: "InvalidRequestDataError"
+    }
+  }
+
+  return await actionHandler({
+    async action() {
+      return await service.findByUserId(userId);
+    },
+  })
+}
