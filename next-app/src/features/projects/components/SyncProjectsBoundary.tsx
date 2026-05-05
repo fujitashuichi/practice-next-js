@@ -18,7 +18,7 @@ export function SyncProjectsBoundary({ children }: { children: React.ReactNode }
     }
     {
       status === "error" && <>
-        <h1>{errorMessage}</h1>
+        <h1>{errorMessage ?? "エラーが発生しました"}</h1>
         <AppButton variant="primary" onClick={sync}>
           プロジェクト再取得
         </AppButton>
