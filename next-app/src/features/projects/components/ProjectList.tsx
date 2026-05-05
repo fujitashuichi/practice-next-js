@@ -1,49 +1,26 @@
 "use client";
 
-import { projectsMock } from "@/__mock__/projects.Mock";
-import { AppLoadingBar } from "@/components/AppLoadingBar";
 import Link from "next/link";
-import { useState } from "react";
 import { CreateProjectForm } from "./internal/CreateProjectForm";
+import { useProjectHooks } from "../contexts/context";
 
 export function ProjectList() {
-  /* original　→ /
-  const { projectsData, getProjects } = useProject();
-  const { projects } = projectsData;
-  const { get, status, errorMessage } = getProjects;
-  /* ← original */
-
-  /* mock → */
-  const [status, ] = useState("success");
-  const projects = projectsMock;
-  const errorMessage = "errorMessage";
-  const get = () => { return };
-  /* ← mock */
+  const { projects: projectsHook } = useProjectHooks();
+  const { projects } = projectsHook;
 
 
   return (
     <section className="p-4 flex flex-col">
-      <h2 className="mx-auto text-xl font-bold mb-4">Project List</h2>
+      <h1 className="mx-auto text-xl font-bold mb-4">Project 一覧</h1>
 
-      {status === "pending" && (
-        <AppLoadingBar className="fixed top-0 left-1/2 -translate-x-1/2 z-10 w-20 h-1.5" />
-      )}
-
-      {status === "error" && (
-        <div className="mx-auto text-red-500 p-4 border border-red-200 rounded">
-          {errorMessage}
-          <button onClick={get} className="ml-4 underline">再試行</button>
-        </div>
-      )}
-
-      {status === "success" && projects.length === 0 && (
+      {projects.length === 0 && (
         <div className="mx-auto">
           <p className="text-gray-500">プロジェクトがありません。新しく作成してください。</p>
           <CreateProjectForm />
         </div>
       )}
 
-      {status === "success" && projects.length > 0 && (
+      {projects.length > 0 && (
         <div className="mx-auto">
           <div className="mb-5">
             <CreateProjectForm />

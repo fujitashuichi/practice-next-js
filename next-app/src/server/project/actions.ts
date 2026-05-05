@@ -25,7 +25,7 @@ export const createProjectAction = async (formData: FormData): Promise<ActionRes
   };
 
   return await actionHandler({
-    async action() {
+    action: async () => {
       return await service.createProject(parsed.data)
     }
   })
@@ -46,7 +46,7 @@ export const updateProjectAction = async (formData: FormData, id: Project["id"])
   }
 
   return await actionHandler({
-    async action() {
+    action: async () => {
       return await service.updateProject(parsed.data, id);
     },
   })
@@ -64,7 +64,7 @@ export const removeProjectAction = async (id: Project["id"]): Promise<ActionResu
   }
 
   return await actionHandler({
-    async action() {
+    action: async () => {
       return await service.deleteProject(id);
     },
   })
@@ -100,7 +100,7 @@ export const getUsersProjectsAction = async (): Promise<ActionResult<Project[]>>
   }
 
   return await actionHandler({
-    async action() {
+    action: async () => {
       return await service.findByUserId(userId);
     },
   })
