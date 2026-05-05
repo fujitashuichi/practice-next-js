@@ -13,7 +13,8 @@ export function SyncProjectsBoundary({ children }: { children: React.ReactNode }
 
   return (<>
     {
-      status === "idle" || status === "pending" && <AppLoadingBar />
+      (status === "idle" || status === "pending") && <AppLoadingBar />
+
     }
     {
       status === "error" && <>
