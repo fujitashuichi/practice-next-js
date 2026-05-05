@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { auth } from "@/auth";
 import { SigninButton } from "@/auth/components";
+import React from "react";
+import { ProjectProvider } from "@/features/projects/contexts/ProjectProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,12 +35,23 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        {
-          isSessionActive
-            ? <>{children}</>
-            : <SigninButton />
-        }
+        <Providers>
+          {
+            isSessionActive
+              ? <>{children}</>
+              : <SigninButton />
+          }
+        </Providers>
       </body>
     </html>
   );
+}
+
+
+function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <ProjectProvider>
+      {children}
+    </ProjectProvider>
+  )
 }

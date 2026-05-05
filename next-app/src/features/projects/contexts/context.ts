@@ -1,3 +1,5 @@
+"use client";
+
 import { Project } from "@/schemas/project";
 import React, { createContext, useContext, type SetStateAction } from "react";
 
@@ -50,7 +52,7 @@ export type ProjectCtxType = {
 
 export const ProjectCtx = createContext<ProjectCtxType | null>(null);
 
-export const useProject = () => {
+export const useProjectHooks = () => {
   const ctx = useContext(ProjectCtx);
   if (ctx === null) throw new Error("Context must be used within Provider");
   return ctx;
