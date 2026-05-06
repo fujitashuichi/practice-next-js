@@ -3,35 +3,16 @@
 import { AppButton } from "@/components/AppButton";
 import { AppLoadingBar } from "@/components/AppLoadingBar";
 import { Project } from "@/schemas/project";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useProjectHooks } from "../../contexts/context";
 
 
 export function EditProjectForm({ id }: { id: Project["id"] }) {
-  /* original → /
-  const { update: updateProject } = useProject();
-  const { update, status, errorMessage, reset } = updateProject;
-  /* ← original */
-  const tryUpdate = (e: React.SubmitEvent<HTMLFormElement>) => update(e, id);
-
-  /* mock → */
-  const update = (e: React.SubmitEvent<HTMLFormElement>, id: Project["id"]) => {};
-  const [status, setStatus] = useState("idle");
-  const reset = () => setStatus("idle");
-  const errorMessage = "errorMessage";
-  /* ← mock */
-
-  useEffect(() => {
-    if (status === "error" || status === "success") {
-      const timer = setTimeout(() => reset(), 3000);
-      return () => {
-        reset();
-        clearTimeout(timer);
-      }
-    }
-  }, [status, reset]);
+  const { update: updateProject } = useProjectHooks();
+  const { update, status, errorMessage } = updateProject;
 
 
-  if (status === "idle") return <EditForm tryUpdate={tryUpdate} />
+  if (status === "idle") return <EditForm tryUpdate={(e) => update(e, id)} />
 
   if (status === "pending") return <AppLoadingBar />
 

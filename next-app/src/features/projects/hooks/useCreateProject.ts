@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { ProjectCtxType } from "../contexts/context";
 import { createProjectAction } from "@/server/project/actions";
 import { ResponseErrorName } from "@/schemas/error";
@@ -24,11 +24,15 @@ export const useCreateProject = (sync: ProjectCtxType["sync"]["sync"]): Hook => 
     setErrorMessage(null);
   }
 
-  const create = async (formData: FormData) => {
+  const create = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     reset();
     setStatus("pending");
 
     try {
+      const formData = new FormData(e.currentTarget);
+
       const result = await createProjectAction(formData);
 
       if (!result.success) {

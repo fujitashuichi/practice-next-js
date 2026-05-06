@@ -10,7 +10,7 @@ export function CreateProjectForm() {
 
   return (<>
     {status === "idle" &&
-      <form onSubmit={(e) => create(new FormData(e.currentTarget))} className="flex flex-col gap-6 w-full max-w-lg p-8 bg-white border border-slate-200 rounded-2xl shadow-sm">
+      <form onSubmit={create} className="flex flex-col gap-6 w-full max-w-lg p-8 bg-white border border-slate-200 rounded-2xl shadow-sm">
         <div className="space-y-1.5">
           <label htmlFor="title" className="text-sm font-semibold text-slate-700 ml-1">
             Title

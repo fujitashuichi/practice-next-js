@@ -24,14 +24,14 @@ type Sync = {
 type Create = {
   status: Status,
   errorMessage: string | null,
-  create: (formData: FormData) => Promise<Project | null>,
+  create: (e: React.SubmitEvent<HTMLFormElement>) => Promise<Project | null>,
   reset: () => void
 };
 
 type Update = {
   status: Status,
   errorMessage: string | null,
-  update: (formData: FormData, id: Project["id"]) => Promise<Project | null>
+  update: (e: React.SubmitEvent<HTMLFormElement>, id: Project["id"]) => Promise<Project | null>
   reset: () => void
 };
 
