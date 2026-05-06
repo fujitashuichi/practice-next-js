@@ -23,6 +23,8 @@ export const createProjectAction = async (formData: FormData): Promise<ActionRes
     }
   }
 
+  formData.append("userId", sessionResult.userId);
+
   const parsed = await parseFormData({
     formData,
     schema: CreateProjectPayloadSchema,
@@ -40,10 +42,7 @@ export const createProjectAction = async (formData: FormData): Promise<ActionRes
 
   return await actionHandler({
     action: async () => {
-      return await service.createProject({
-        ...parsed.data,
-        userId: sessionResult.userId
-      })
+      return await service.createProject(parsed.data)
     }
   })
 }
