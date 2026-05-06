@@ -5,29 +5,18 @@ import { actionHandler } from "../lib/actionsHandler";
 import { parseFormData } from "../lib/parseFormData";
 import { ActionResult } from "../types/actionResult.types";
 import { ProjectService } from "./service/project.service";
-import { CreateProjectPayloadSchema, UpdateProjectPayloadSchema } from "./types";
 import { logger } from "@/tools/log";
 import { checkUserSession } from "../lib/checkUserSession";
+import { CreateProjectFormSchema, UpdateProjectFormSchema } from "../types/form.types";
 
 
 const service = new ProjectService();
 
 
 export const createProjectAction = async (formData: FormData): Promise<ActionResult<Project>> => {
-  const sessionResult = await checkUserSession();
-
-  if (!sessionResult.isSession) {
-    return {
-      success: false,
-      errorName: "UnAuthorizedError"
-    }
-  }
-
-  formData.append("userId", sessionResult.userId);
-
   const parsed = await parseFormData({
     formData,
-    schema: CreateProjectPayloadSchema,
+    schema: CreateProjectFormSchema,
     useFor: "create"
   });
 
@@ -40,9 +29,23 @@ export const createProjectAction = async (formData: FormData): Promise<ActionRes
     };
   }
 
+
+  const sessionResult = await checkUserSession();
+
+  if (!sessionResult.isSession) {
+    return {
+      success: false,
+      errorName: "UnAuthorizedError"
+    }
+  }
+
+
   return await actionHandler({
     action: async () => {
-      return await service.createProject(parsed.data)
+      return await service.createProject({
+        ...parsed.data,
+        userId: sessionResult.userId
+      })
     }
   })
 }
@@ -50,7 +53,7 @@ export const createProjectAction = async (formData: FormData): Promise<ActionRes
 export const updateProjectAction = async (formData: FormData, id: Project["id"]): Promise<ActionResult<Project>> => {
   const parsed = await parseFormData({
     formData,
-    schema: UpdateProjectPayloadSchema,
+    schema: UpdateProjectFormSchema,
     useFor: "update"
   });
 
