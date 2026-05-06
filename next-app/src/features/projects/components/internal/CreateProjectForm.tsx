@@ -1,35 +1,16 @@
 import { AppButton } from "@/components/AppButton";
 import { AppLoadingBar } from "@/components/AppLoadingBar";
-import React, { useState } from "react";
+import { useProjectHooks } from "../../contexts/context";
 
 
 export function CreateProjectForm() {
-  /* original → /
-  const { create: createProject } = useProject();
-  const { create, reset, status, errorMessage } = createProject;
+  const { create: createProjectHook } = useProjectHooks();
+  const { create, status, errorMessage } = createProjectHook;
 
-  useEffect(() => {
-    if (status === "success") {
-      const timer = setTimeout(() => reset(), 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [status, reset]);
-  /* ← original */
-
-  /* mock → */
-  const [status, setStatus] = useState("idle");
-  const errorMessage = "errorMessage";
-  const create = (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    setTimeout(() => setStatus("success"), 2000);
-    setTimeout(() => setStatus("idle"), 3500);
-  }
-  /* ← mock */
 
   return (<>
     {status === "idle" &&
-      <form onSubmit={create} className="flex flex-col gap-6 w-full max-w-lg p-8 bg-white border border-slate-200 rounded-2xl shadow-sm">
+      <form onSubmit={(e) => create(new FormData(e.currentTarget))} className="flex flex-col gap-6 w-full max-w-lg p-8 bg-white border border-slate-200 rounded-2xl shadow-sm">
         <div className="space-y-1.5">
           <label htmlFor="title" className="text-sm font-semibold text-slate-700 ml-1">
             Title
@@ -87,7 +68,7 @@ export function CreateProjectForm() {
     }
 
     {status === "error" &&
-      <h2>{errorMessage}</h2>
+      <h1>{errorMessage}</h1>
     }
 
     {status === "success" &&

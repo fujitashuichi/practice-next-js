@@ -1,9 +1,9 @@
 "use client";
 
-import { projectsMock } from "@/__mock__/projects.Mock";
 import { AppButton } from "@/components/AppButton";
 import { AppLoadingBar } from "@/components/AppLoadingBar";
 import { EditProjectModal } from "@/features/projects/components/EditProjectModal";
+import { useProjectHooks } from "@/features/projects/contexts/context";
 import { type Project } from "@/schemas/project";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -12,36 +12,27 @@ import { useEffect, useState } from "react";
 export function Project({ id }: { id: Project["id"] }) {
   const [editing, setEditing] = useState<boolean>(false);
 
-  /* original → /
-  const { projects, delete: deleteProjectHook } = useProject();
-  const { delete: deleteProject, status: deleteStatus, errorMessage, reset: resetDeleteStatus } = deleteProjectHook;
-  /* ← original */
+  const { projects: projectsHook, remove: removeProjectHook } = useProjectHooks();
 
-  /* mock → */
-  const projects = projectsMock;
-  const deleteProject = async (id: Project["id"]) => {
-    console.log("deleted Project:", id);
-  };
-  const [deleteStatus, setDeleteStatus] = useState("idle");
-  const resetDeleteStatus = () => setDeleteStatus("idle");
-  const errorMessage = "errorMessage";
-  /* ← mock */
+  const { projects } = projectsHook;
+  const { remove, status, errorMessage, reset } = removeProjectHook;
+
 
   const project: Project | undefined = projects.find(item => item.id === id);
 
   const tryDelete = async (id: Project["id"]) => {
-    await deleteProject(id);
+    await remove(id);
   }
 
   useEffect(() => {
-    if (deleteStatus === "error") {
-      const timer = setTimeout(() => resetDeleteStatus(), 2000);
+    if (status === "error") {
+      const timer = setTimeout(() => reset(), 2000);
       return () => clearTimeout(timer);
     }
-    if (deleteStatus === "success") {
+    if (status === "success") {
       window.location.replace("/projects");
     }
-  }, [deleteStatus, resetDeleteStatus]);
+  }, [status, reset]);
 
 
   if (!project) return (
@@ -103,21 +94,21 @@ export function Project({ id }: { id: Project["id"] }) {
 
       {/* 状態通知エリア（トースト的な役割） */}
       <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-sm space-y-2 px-4">
-        {deleteStatus === "pending" && (
+        {status === "pending" && (
           <div className="bg-slate-900 text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-4 animate-bounce">
             <AppLoadingBar className="w-12 h-1 bg-blue-500 rounded-full" />
             <span className="text-sm font-medium">削除しています...</span>
           </div>
         )}
 
-        {deleteStatus === "error" && (
+        {status === "error" && (
           <div className="bg-red-50 border border-red-200 p-4 rounded-2xl shadow-lg animate-in slide-in-from-bottom-4">
             <h1 className="text-sm font-bold text-red-700">削除に失敗しました</h1>
             <p className="text-xs text-red-600 mt-1">{errorMessage}</p>
           </div>
         )}
 
-        {deleteStatus === "success" && (
+        {status === "success" && (
           <div className="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl shadow-lg animate-in fade-in slide-in-from-bottom-4">
             <h1 className="text-sm font-bold text-emerald-700 text-center">正常に削除されました</h1>
           </div>
