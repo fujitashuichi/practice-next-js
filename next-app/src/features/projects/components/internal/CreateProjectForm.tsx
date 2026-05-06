@@ -1,31 +1,12 @@
 import { AppButton } from "@/components/AppButton";
 import { AppLoadingBar } from "@/components/AppLoadingBar";
-import React, { useState } from "react";
+import { useProjectHooks } from "../../contexts/context";
 
 
 export function CreateProjectForm() {
-  /* original → /
-  const { create: createProject } = useProject();
-  const { create, reset, status, errorMessage } = createProject;
+  const { create: createProjectHook } = useProjectHooks();
+  const { create, status, errorMessage } = createProjectHook;
 
-  useEffect(() => {
-    if (status === "success") {
-      const timer = setTimeout(() => reset(), 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [status, reset]);
-  /* ← original */
-
-  /* mock → */
-  const [status, setStatus] = useState("idle");
-  const errorMessage = "errorMessage";
-  const create = (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    setTimeout(() => setStatus("success"), 2000);
-    setTimeout(() => setStatus("idle"), 3500);
-  }
-  /* ← mock */
 
   return (<>
     {status === "idle" &&
@@ -87,7 +68,7 @@ export function CreateProjectForm() {
     }
 
     {status === "error" &&
-      <h2>{errorMessage}</h2>
+      <h1>{errorMessage}</h1>
     }
 
     {status === "success" &&

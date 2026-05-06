@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { ProjectCtxType } from "../contexts/context";
 import { updateProjectAction } from "@/server/project/actions";
 import { ResponseErrorName } from "@/schemas/error";
@@ -25,11 +25,14 @@ export const useUpdateProject = (sync: ProjectCtxType["sync"]["sync"]): Hook => 
     setErrorMessage(null);
   }
 
-  const update = async (formData: FormData, id: Project["id"]) => {
+  const update = async (e: React.SubmitEvent<HTMLFormElement>, id: Project["id"]) => {
+    e.preventDefault();
+
     reset();
     setStatus("pending");
 
     try {
+      const formData = new FormData(e.currentTarget);
       const result = await updateProjectAction(formData, id);
 
       if (!result.success) {
