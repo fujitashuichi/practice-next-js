@@ -5,8 +5,9 @@ import { actionHandler } from "../lib/actionsHandler";
 import { parseFormData } from "../lib/parseFormData";
 import { ActionResult } from "../types/actionResult.types";
 import { ProjectService } from "./service/project.service";
-import { CreateProjectPayloadSchema, UpdateProjectPayloadSchema } from "./types";
-import { auth } from "@/auth";
+import { logger } from "@/tools/log";
+import { checkUserSession } from "../lib/checkUserSession";
+import { CreateProjectFormSchema, UpdateProjectFormSchema } from "../types/form.types";
 
 
 const service = new ProjectService();
@@ -15,18 +16,36 @@ const service = new ProjectService();
 export const createProjectAction = async (formData: FormData): Promise<ActionResult<Project>> => {
   const parsed = await parseFormData({
     formData,
-    schema: CreateProjectPayloadSchema,
+    schema: CreateProjectFormSchema,
     useFor: "create"
   });
 
-  if (!parsed.success) return {
-    success: false,
-    errorName: "InvalidRequestDataError"
-  };
+  if (!parsed.success) {
+    logger.fatal(parsed.errorMessage);
+
+    return {
+      success: false,
+      errorName: "InvalidRequestDataError"
+    };
+  }
+
+
+  const sessionResult = await checkUserSession();
+
+  if (!sessionResult.isSession) {
+    return {
+      success: false,
+      errorName: "UnAuthorizedError"
+    }
+  }
+
 
   return await actionHandler({
     action: async () => {
-      return await service.createProject(parsed.data)
+      return await service.createProject({
+        ...parsed.data,
+        userId: sessionResult.userId
+      })
     }
   })
 }
@@ -34,7 +53,7 @@ export const createProjectAction = async (formData: FormData): Promise<ActionRes
 export const updateProjectAction = async (formData: FormData, id: Project["id"]): Promise<ActionResult<Project>> => {
   const parsed = await parseFormData({
     formData,
-    schema: UpdateProjectPayloadSchema,
+    schema: UpdateProjectFormSchema,
     useFor: "update"
   });
 
@@ -72,36 +91,19 @@ export const removeProjectAction = async (id: Project["id"]): Promise<ActionResu
 
 
 export const getUsersProjectsAction = async (): Promise<ActionResult<Project[]>> => {
-  const session = await auth();
-  const user = session?.user;
+  const sessionResult = await checkUserSession();
 
-  if (!user) {
+  if (!sessionResult.isSession) {
     return {
       success: false,
       errorName: "UnAuthorizedError"
     }
   }
 
-  const userId = user.id;
-  if (!userId) {
-    return {
-      success: false,
-      errorName: "AuthError"
-    }
-  }
-
-  const parsed = ProjectSchema.pick({ userId: true }).safeParse({ userId });
-
-  if (!parsed.success) {
-    return {
-      success: false,
-      errorName: "InvalidRequestDataError"
-    }
-  }
 
   return await actionHandler({
     action: async () => {
-      return await service.findByUserId(userId);
+      return await service.findByUserId(sessionResult.userId);
     },
   })
 }
