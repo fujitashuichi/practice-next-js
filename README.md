@@ -100,3 +100,8 @@ shincodeさんの解説は、初めてライブラリを触る人からある程
 * hooksをctxで配布
 * hooksをコンポーネントで使用
 * sync状態をlayoutでUI化
+
+**2026/05/06**
+* hooksの型設計を調整
+* projectActionsの動作
+* 基本機能の移行が完了
