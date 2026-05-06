@@ -4,6 +4,7 @@ import { logger } from "@/tools/log";
 import { CreateProjectPayload, UpdateProjectPayload } from "../types";
 import { prisma } from "@/lib";
 
+
 export class ProjectRepository {
   constructor() {}
 
